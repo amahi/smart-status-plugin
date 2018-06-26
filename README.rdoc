@@ -1,0 +1,3 @@
+= Amahi plugin SMART Status
+
+SMART Status for the Amahi platform

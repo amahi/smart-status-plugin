@@ -1,0 +1,7 @@
+# Localization in English
+
+'en':
+  # put here your string symbols and translations
+  hello_world: Hello World! (yay for the Amahi plugins!)
+  smart_status: SMART Status
+  health_check: Basic Health Check
