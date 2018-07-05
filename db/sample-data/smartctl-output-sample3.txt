@@ -1,0 +1,5 @@
+smartctl 6.5 2016-05-07 r4318 [x86_64-linux-4.13.9-300.fc27.x86_64] (local build)
+Copyright (C) 2002-16, Bruce Allen, Christian Franke, www.smartmontools.org
+
+SMART support is: Unavailable - device lacks SMART capability.
+A mandatory SMART command failed: exiting. To continue, add one or more '-T permissive' options.
