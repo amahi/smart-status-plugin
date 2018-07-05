@@ -50,7 +50,7 @@ class SmartTestUtil
 		end
 
 		def read_smart_status(filepath)			
-			return "Some error occurred" unless File.exists?(filepath)
+			return "Some Error Occurred !!" unless File.exists?(filepath)
 			file = File.new(filepath)
 			line_num = file.find_index { |line| line =~ /START OF READ SMART DATA SECTION/ }
 
