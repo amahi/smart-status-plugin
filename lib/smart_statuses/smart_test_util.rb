@@ -15,8 +15,8 @@ class SmartTestUtil
 
 		def get_created_file_path(device)
 			return nil if device.blank?
-			status_file = Rails.root+Dir["plugins/*smart_statuses/db/smartctl-"+device[5..-1]][0]
-			read_smart_status(status_file)
+			status_file_path = "/home/.smartctl-data/smartctl-"+device[5..-1]
+			read_smart_status(status_file_path)
 		end
 
 		def sample_stats

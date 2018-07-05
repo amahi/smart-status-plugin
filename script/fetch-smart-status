@@ -6,7 +6,8 @@ lsblk -o name,type | grep disk | awk '{print $1;}' >> disk_names
 
 while read line
   do
-    smartctl -H '/dev/'$line > '../db/smartctl-'$line
+    mkdir /home/.smartctl-data
+    smartctl -H '/dev/'$line > '/home/.smartctl-data/smartctl-'$line
 done < disk_names
 
 EOF
