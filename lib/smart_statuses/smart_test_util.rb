@@ -15,7 +15,7 @@ class SmartTestUtil
 
 		def fetch_status(device)
 			return nil if device.blank?
-			status = `/var/hda/apps/0gjocmmq4k/elevated/smart-details #{device[5..-1]}`
+			status = `sudo /var/hda/apps/0gjocmmq4k/elevated/smart-details #{device[5..-1]}`
 			read_streamed_smart_status(status)
 		end
 
