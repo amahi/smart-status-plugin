@@ -1,16 +1,13 @@
 mkdir -p elevated
 cd elevated
-cat > elevated-script << 'EOF'
 
-lsblk -o name,type | grep disk | awk '{print $1;}' >> disk_names
+cat > smart-details << 'EOF'
 
-while read line
-  do
-    smartctl -H '/dev/'$line > '/db/smartctl-'$line
-done < disk_names
+
+drive=$1
+
+smartctl -H "/dev/$drive"
 
 EOF
-chmod +x elevated-script
-sudo ./elevated-script
-cd ..
-rm -rf elevated
+
+chmod +x smart-details

@@ -4,19 +4,19 @@ class SmartTestUtil
 			@disks = DiskUtils.stats
 			response = []
 			@disks.each_with_index do |disk, index|
-				status = read_smart_status(get_created_file_path(disk[:device]))
+				status = fetch_status(disk[:device])
 				next if status.blank?
 				color = get_color(status)
-				response << { model: disk[:model], device: disk[:device], 
+				response << { model: disk[:model], device: disk[:device],
 					health_check: status, color: color }
 			end
 			return response
 		end
 
-		def get_created_file_path(device)
+		def fetch_status(device)
 			return nil if device.blank?
-			status_file = Rails.root+Dir["plugins/*smart_statuses/db/smartctl-"+device[5..-1]][0]
-			read_smart_status(status_file)
+			status = `/var/hda/apps/0gjocmmq4k/elevated/smart-details #{device[5..-1]}`
+			read_streamed_smart_status(status)
 		end
 
 		def sample_stats
@@ -25,7 +25,7 @@ class SmartTestUtil
 			@disks.each_with_index do |disk, index|
 				status = read_smart_status(get_sample_file_path(index))
 				color = get_color(status)
-				response << { model: disk[:model], device: disk[:device], 
+				response << { model: disk[:model], device: disk[:device],
 					health_check: status, color: color }
 			end
 			return response
@@ -58,6 +58,18 @@ class SmartTestUtil
 				return "Device Lacks SMART Compatibility."
 			else
 				return IO.readlines(filepath)[line_num + 1][50..-1]
+			end
+		end
+
+		def read_streamed_smart_status(status)
+			return "Some Error Occurred !!" if status.blank?
+			strings = status.split("\n")
+			line_num = strings.index { |line| line =~ /START OF READ SMART DATA SECTION/ }
+
+			if line_num.blank?
+				return "Device Lacks SMART Compatibility."
+			else
+				return strings[line_num + 1][50..-1]
 			end
 		end
 	end
