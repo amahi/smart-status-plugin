@@ -1,3 +1,3 @@
 module SmartStatus
-	VERSION = "0.0.1"
+	VERSION = "1.42.0"
 end
